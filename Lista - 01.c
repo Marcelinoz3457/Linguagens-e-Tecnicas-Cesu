@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-/*
+/*exercício 3
     int n, resultado;
     int bit64, bit32, bit16, bit8, bit4, bit2, bit1;
 
@@ -33,6 +33,7 @@ int main() {
     printf("O numero %d em binario = %d%d%d%d%d%d%d", n, bit1, bit2, bit4, bit8, bit16, bit32, bit64);
     
     */
+    //exercício 8
     int x1, x2, y1, y2;
     float dist;
 
