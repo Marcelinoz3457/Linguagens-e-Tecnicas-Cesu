@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
+#include <ctype.h>
 
 // Cada exercicio vira uma funcao.
 // Uma funcao e so um "pedacinho de codigo" com um nome,
@@ -159,7 +161,6 @@ int main() {
         scanf("%d", &opcao);
         printf("\n");
 
-        
         // depende do numero que a pessoa digitou.
         if (opcao == 1) {
             exercicio1();
@@ -182,6 +183,16 @@ int main() {
             break; // "break" sai do while, ou seja, encerra o programa
         } else {
             printf("Opcao invalida, tente de novo.\n");
+        }
+
+        // Se nao foi a opcao de sair, espera o usuario ver o resultado
+        // antes de limpar a tela e mostrar o menu de novo.
+        if (opcao != 0) {
+            printf("\nPressione ENTER para continuar...");
+            while (getchar() != '\n'); // limpa o "enter" que ficou no buffer do scanf
+            getchar();                 // espera o ENTER de verdade do usuario
+
+            system("cls"); // limpa a tela DEPOIS que o resultado foi visto
         }
     }
 
