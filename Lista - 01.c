@@ -6,17 +6,20 @@
 // Cada exercicio vira uma funcao.
 // Uma funcao e so um "pedacinho de codigo" com um nome,
 // que a gente pode chamar quando quiser, sem copiar e colar tudo de novo.
+// Cada funcao retorna 1 quando terminou certinho.
 
-void exercicio1() {
+int exercicio1() {
     int n1, n2;
 
     printf("Digite dois numeros inteiros: ");
     scanf("%d %d", &n1, &n2);
 
     printf("Ordem inversa: %d %d\n", n2, n1);
+
+    return 1;
 }
 
-void exercicio2() {
+int exercicio2() {
     double numero;
     int expoente = 0;
 
@@ -45,9 +48,11 @@ void exercicio2() {
     }
 
     printf("Notacao cientifica: %.6lf x 10^%d\n", numero, expoente);
+
+    return 1;
 }
 
-void exercicio3() {
+int exercicio3() {
     int n;
     int b1, b2, b3, b4, b5, b6, b7;
 
@@ -63,9 +68,11 @@ void exercicio3() {
     b7 = n % 2;
 
     printf("Binario: %d%d%d%d%d%d%d\n", b7, b6, b5, b4, b3, b2, b1);
+
+    return 1;
 }
 
-void exercicio4() {
+int exercicio4() {
     double salario, vendas, total;
 
     printf("Digite o salario fixo: ");
@@ -77,9 +84,11 @@ void exercicio4() {
     total = salario + (vendas * 0.15);
 
     printf("TOTAL = R$ %.2lf\n", total);
+
+    return 1;
 }
 
-void exercicio5() {
+int exercicio5() {
     double valor1, valor2, valor3, valor4;
     double soma, media, produto;
 
@@ -93,9 +102,11 @@ void exercicio5() {
     printf("Soma = %.2lf\n", soma);
     printf("Media = %.2lf\n", media);
     printf("Produto = %.2lf\n", produto);
+
+    return 1;
 }
 
-void exercicio6() {
+int exercicio6() {
     int dias, anos, meses, diasRestantes;
 
     printf("Digite a idade em dias: ");
@@ -109,9 +120,11 @@ void exercicio6() {
     printf("%d ano(s)\n", anos);
     printf("%d mes(es)\n", meses);
     printf("%d dia(s)\n", diasRestantes);
+
+    return 1;
 }
 
-void exercicio7() {
+int exercicio7() {
     double raio, volume;
     double pi = 3.14159;
 
@@ -121,9 +134,11 @@ void exercicio7() {
     volume = (4.0 / 3.0) * pi * raio * raio * raio;
 
     printf("VOLUME = %.3lf\n", volume);
+
+    return 1;
 }
 
-void exercicio8() {
+int exercicio8() {
     double x1, y1, x2, y2;
     double distancia;
 
@@ -136,17 +151,19 @@ void exercicio8() {
     distancia = sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 
     printf("Distancia = %.4lf\n", distancia);
+
+    return 1;
 }
 
 // A funcao main e onde o programa comeca a rodar de verdade.
 int main() {
 
-    int opcao;
+    int opcao, status;
 
     // O "while" repete tudo aqui dentro ate a pessoa digitar 0.
     while (1) {
 
-        printf("\n===== MENU =====\n");
+        printf("\n===== MENU - LISTA 01 =====\n");
         printf("1 - Ordem inversa\n");
         printf("2 - Notacao cientifica\n");
         printf("3 - Binario\n");
@@ -161,39 +178,57 @@ int main() {
         scanf("%d", &opcao);
         printf("\n");
 
-        // depende do numero que a pessoa digitou.
-        if (opcao == 1) {
-            exercicio1();
-        } else if (opcao == 2) {
-            exercicio2();
-        } else if (opcao == 3) {
-            exercicio3();
-        } else if (opcao == 4) {
-            exercicio4();
-        } else if (opcao == 5) {
-            exercicio5();
-        } else if (opcao == 6) {
-            exercicio6();
-        } else if (opcao == 7) {
-            exercicio7();
-        } else if (opcao == 8) {
-            exercicio8();
-        } else if (opcao == 0) {
-            printf("Ate mais!\n");
+        // switch/case decide o que fazer dependendo do numero digitado.
+        switch (opcao) {
+            case 1:
+                status = exercicio1();
+                break;
+            case 2:
+                status = exercicio2();
+                break;
+            case 3:
+                status = exercicio3();
+                break;
+            case 4:
+                status = exercicio4();
+                break;
+            case 5:
+                status = exercicio5();
+                break;
+            case 6:
+                status = exercicio6();
+                break;
+            case 7:
+                status = exercicio7();
+                break;
+            case 8:
+                status = exercicio8();
+                break;
+            case 0:
+                status = 1;
+                printf("Ate mais!\n");
+                break;
+            default:
+                status = 0;
+                printf("Opcao invalida, tente de novo.\n");
+                break;
+        }
+
+        if (opcao == 0) {
             break; // "break" sai do while, ou seja, encerra o programa
-        } else {
-            printf("Opcao invalida, tente de novo.\n");
         }
 
-        // Se nao foi a opcao de sair, espera o usuario ver o resultado
-        // antes de limpar a tela e mostrar o menu de novo.
-        if (opcao != 0) {
-            printf("\nPressione ENTER para continuar...");
-            while (getchar() != '\n'); // limpa o "enter" que ficou no buffer do scanf
-            getchar();                 // espera o ENTER de verdade do usuario
-
-            system("cls"); // limpa a tela DEPOIS que o resultado foi visto
+        if (status == 0 && opcao != 0) {
+            printf("\n(A operacao nao foi concluida com sucesso.)\n");
         }
+
+        // Espera o usuario ver o resultado antes de limpar a tela
+        // e mostrar o menu de novo.
+        printf("\nPressione ENTER para continuar...");
+        while (getchar() != '\n'); // limpa o "enter" que ficou no buffer do scanf
+        getchar();                 // espera o ENTER de verdade do usuario
+
+        system("cls"); // limpa a tela DEPOIS que o resultado foi visto
     }
 
     return 0;
