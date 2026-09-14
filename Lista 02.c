@@ -27,7 +27,7 @@ int main() {
     do {
         // --- Tela de opcoes ---
         printf("\n===================================================\n");
-        printf("        MENU - ESCOLHA O EXERCICIO A EXECUTAR\n");
+        printf("        MENU - LISTA 2\n");
         printf("===================================================\n");
         printf(" 1  - Calcular ano de nascimento\n");
         printf(" 2  - Converter velocidade km/h para m/s\n");
