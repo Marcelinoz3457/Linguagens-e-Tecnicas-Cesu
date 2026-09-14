@@ -1,277 +1,229 @@
-/*
- * Trabalho de Algoritmos - Linguagem C
- * Implementacao dos 10 exercicios propostos, com um menu no main()
- * que permite ao usuario escolher qual exercicio deseja executar.
- * Uso de printf/scanf e estrutura if/else if/else para o menu.
- */
-
 #include <stdio.h>
-#include <math.h>   // usada na questao 10 (fabs) - fabs de double
+#include <stdlib.h>
+#include <math.h>
+#include <ctype.h>
 
-// ---------- Prototipos das funcoes de cada exercicio ----------
-void exercicio1(void);
-void exercicio2(void);
-void exercicio3(void);
-void exercicio4(void);
-void exercicio5(void);
-void exercicio6(void);
-void exercicio7(void);
-void exercicio8(void);
-void exercicio9(void);
-void exercicio10(void);
+// Cada exercicio vira uma funcao.
+// Uma funcao e so um "pedacinho de codigo" com um nome,
+// que a gente pode chamar quando quiser, sem copiar e colar tudo de novo.
+// Cada funcao retorna 1 quando terminou certinho.
 
-int main() {
-    int opcao;
+int exercicio1() {
+    int n1, n2;
 
-    // Loop do menu: continua exibindo ate o usuario escolher sair (0)
-    do {
-        // --- Tela de opcoes ---
-        printf("\n===================================================\n");
-        printf("        MENU - LISTA 2\n");
-        printf("===================================================\n");
-        printf(" 1  - Calcular ano de nascimento\n");
-        printf(" 2  - Converter velocidade km/h para m/s\n");
-        printf(" 3  - Converter reais para dolares\n");
-        printf(" 4  - Converter Celsius para Fahrenheit\n");
-        printf(" 5  - Converter graus para radianos\n");
-        printf(" 6  - Antecessor e sucessor de um numero\n");
-        printf(" 7  - Divisao do premio entre 3 ganhadores\n");
-        printf(" 8  - Converter segundos para horas:minutos:segundos\n");
-        printf(" 9  - Calculo de consumo de combustivel (URI 1017)\n");
-        printf(" 10 - Maior entre tres valores (URI 1013)\n");
-        printf(" 0  - Sair\n");
-        printf("---------------------------------------------------\n");
-        printf("Digite a opcao desejada: ");
-        scanf("%d", &opcao);
+    printf("Digite dois numeros inteiros: ");
+    scanf("%d %d", &n1, &n2);
 
-        // --- Estrutura if / else if / else para chamar o exercicio escolhido ---
-        if (opcao == 1) {
-            exercicio1();
-        } else if (opcao == 2) {
-            exercicio2();
-        } else if (opcao == 3) {
-            exercicio3();
-        } else if (opcao == 4) {
-            exercicio4();
-        } else if (opcao == 5) {
-            exercicio5();
-        } else if (opcao == 6) {
-            exercicio6();
-        } else if (opcao == 7) {
-            exercicio7();
-        } else if (opcao == 8) {
-            exercicio8();
-        } else if (opcao == 9) {
-            exercicio9();
-        } else if (opcao == 10) {
-            exercicio10();
-        } else if (opcao == 0) {
-            printf("\nEncerrando o programa...\n");
-        } else {
-            printf("\nOpcao invalida! Tente novamente.\n");
-        }
+    printf("Ordem inversa: %d %d\n", n2, n1);
 
-    } while (opcao != 0);
-
-    return 0;
+    return 1;
 }
 
-/*
- * 1) Faca um programa que calcule o ano de nascimento de uma pessoa
- *    a partir de sua idade e do ano atual.
- */
-void exercicio1(void) {
-    int idade, anoAtual, anoNascimento;
+int exercicio2() {
+    double numero;
+    int expoente = 0;
 
-    printf("\n--- Exercicio 1: Ano de nascimento ---\n");
-    printf("Digite sua idade: ");
-    scanf("%d", &idade);
-    printf("Digite o ano atual: ");
-    scanf("%d", &anoAtual);
+    printf("Digite um numero positivo: ");
+    scanf("%lf", &numero);
 
-    // O ano de nascimento e a subtracao do ano atual pela idade
-    anoNascimento = anoAtual - idade;
+    if (numero >= 10) {
+        numero = numero / 10;
+        expoente = 1;
+    }
+    if (numero >= 10) {
+        numero = numero / 10;
+        expoente = 2;
+    }
+    if (numero >= 10) {
+        numero = numero / 10;
+        expoente = 3;
+    }
+    if (numero >= 10) {
+        numero = numero / 10;
+        expoente = 4;
+    }
+    if (numero >= 10) {
+        numero = numero / 10;
+        expoente = 5;
+    }
 
-    printf("Voce nasceu (aproximadamente) no ano: %d\n", anoNascimento);
+    printf("Notacao cientifica: %.6lf x 10^%d\n", numero, expoente);
+
+    return 1;
 }
 
-/*
- * 2) Leia uma velocidade em km/h e apresente convertida em m/s.
- *    Formula: M = K / 3.6, sendo K a velocidade em km/h e M em m/s.
- */
-void exercicio2(void) {
-    double K, M;
-
-    printf("\n--- Exercicio 2: km/h para m/s ---\n");
-    printf("Digite a velocidade em km/h: ");
-    scanf("%lf", &K);
-
-    M = K / 3.6;
-
-    printf("A velocidade em m/s e: %.2lf m/s\n", M);
-}
-
-/*
- * 3) Faca um programa que leia um valor em reais e a cotacao do dolar.
- *    Em seguida, imprima o valor correspondente em dolares.
- */
-void exercicio3(void) {
-    double reais, cotacaoDolar, valorDolar;
-
-    printf("\n--- Exercicio 3: Reais para dolares ---\n");
-    printf("Digite o valor em reais: ");
-    scanf("%lf", &reais);
-    printf("Digite a cotacao do dolar: ");
-    scanf("%lf", &cotacaoDolar);
-
-    // Para converter reais em dolares, divide-se pela cotacao
-    valorDolar = reais / cotacaoDolar;
-
-    printf("O valor correspondente em dolares e: $ %.2lf\n", valorDolar);
-}
-
-/*
- * 4) Leia um valor que represente uma temperatura em graus Celsius e
- *    apresente-o convertido em graus Fahrenheit.
- *    Formula: F = C * (9.0/5.0) + 32.0
- */
-void exercicio4(void) {
-    double C, F;
-
-    printf("\n--- Exercicio 4: Celsius para Fahrenheit ---\n");
-    printf("Digite a temperatura em graus Celsius: ");
-    scanf("%lf", &C);
-
-    F = C * (9.0 / 5.0) + 32.0;
-
-    printf("A temperatura em Fahrenheit e: %.2lf F\n", F);
-}
-
-/*
- * 5) Leia um angulo em graus e apresente-o convertido em radianos.
- *    Formula: R = G * p / 180, sendo G o angulo em graus,
- *    R em radianos e p = 3.141592.
- */
-void exercicio5(void) {
-    double G, R;
-    const double p = 3.141592;
-
-    printf("\n--- Exercicio 5: Graus para radianos ---\n");
-    printf("Digite o angulo em graus: ");
-    scanf("%lf", &G);
-
-    R = G * p / 180;
-
-    printf("O angulo em radianos e: %.6lf rad\n", R);
-}
-
-/*
- * 6) Faca um programa que leia um numero inteiro e retorne
- *    seu antecessor e seu sucessor.
- */
-void exercicio6(void) {
+int exercicio3() {
     int n;
+    int b1, b2, b3, b4, b5, b6, b7;
 
-    printf("\n--- Exercicio 6: Antecessor e sucessor ---\n");
-    printf("Digite um numero inteiro: ");
+    printf("Digite um numero entre 0 e 64: ");
     scanf("%d", &n);
 
-    printf("Antecessor: %d\n", n - 1);
-    printf("Sucessor: %d\n", n + 1);
+    b1 = n % 2; n = n / 2;
+    b2 = n % 2; n = n / 2;
+    b3 = n % 2; n = n / 2;
+    b4 = n % 2; n = n / 2;
+    b5 = n % 2; n = n / 2;
+    b6 = n % 2; n = n / 2;
+    b7 = n % 2;
+
+    printf("Binario: %d%d%d%d%d%d%d\n", b7, b6, b5, b4, b3, b2, b1);
+
+    return 1;
 }
 
-/*
- * 7) A importancia de R$780.000,00 sera dividida entre tres ganhadores
- *    de um concurso: o primeiro recebera 46% do total, o segundo 32%
- *    do total, e o terceiro o restante. Calcule e imprima a quantia
- *    recebida por cada um dos ganhadores.
- */
-void exercicio7(void) {
-    double total = 780000.00;
-    double primeiro, segundo, terceiro;
+int exercicio4() {
+    double salario, vendas, total;
 
-    printf("\n--- Exercicio 7: Divisao do premio ---\n");
+    printf("Digite o salario fixo: ");
+    scanf("%lf", &salario);
 
-    primeiro = total * 0.46;
-    segundo = total * 0.32;
-    terceiro = total - (primeiro + segundo); // o restante
+    printf("Digite o total de vendas: ");
+    scanf("%lf", &vendas);
 
-    printf("O premio total de R$ %.2lf sera dividido assim:\n", total);
-    printf("Primeiro ganhador (46%%): R$ %.2lf\n", primeiro);
-    printf("Segundo ganhador (32%%): R$ %.2lf\n", segundo);
-    printf("Terceiro ganhador (restante): R$ %.2lf\n", terceiro);
+    total = salario + (vendas * 0.15);
+
+    printf("TOTAL = R$ %.2lf\n", total);
+
+    return 1;
 }
 
-/*
- * 8) (URI 1019) Leia um valor inteiro, que e o tempo de duracao em
- *    segundos de um determinado evento em uma fabrica, e informe-o
- *    expresso no formato horas:minutos:segundos.
- */
-void exercicio8(void) {
-    int totalSegundos, horas, minutos, segundos;
+int exercicio5() {
+    double valor1, valor2, valor3, valor4;
+    double soma, media, produto;
 
-    printf("\n--- Exercicio 8: Segundos para horas:minutos:segundos ---\n");
-    printf("Digite o tempo total em segundos: ");
-    scanf("%d", &totalSegundos);
+    printf("Digite quatro valores: ");
+    scanf("%lf %lf %lf %lf", &valor1, &valor2, &valor3, &valor4);
 
-    horas = totalSegundos / 3600;
-    minutos = (totalSegundos % 3600) / 60;
-    segundos = totalSegundos % 60;
+    soma = valor1 + valor2 + valor3 + valor4;
+    media = soma / 4;
+    produto = valor1 * valor2 * valor3 * valor4;
 
-    printf("%d:%d:%d\n", horas, minutos, segundos);
+    printf("Soma = %.2lf\n", soma);
+    printf("Media = %.2lf\n", media);
+    printf("Produto = %.2lf\n", produto);
+
+    return 1;
 }
 
-/*
- * 9) (URI 1017) Joaozinho quer calcular e mostrar a quantidade de
- *    litros de combustivel gastos em uma viagem, ao utilizar um
- *    automovel que faz 12 KM/L. Deve-se fornecer o tempo gasto na
- *    viagem (em horas) e a velocidade media durante a mesma (em
- *    km/h). Assim, pode-se obter a distancia percorrida e, em
- *    seguida, calcular quantos litros seriam necessarios. Mostrar o
- *    valor com 3 casas decimais apos o ponto.
- */
-void exercicio9(void) {
-    double horas, velocidadeMedia, distancia, litros;
-    const double consumoPorLitro = 12.0; // km por litro
+int exercicio6() {
+    int dias, anos, meses, diasRestantes;
 
-    printf("\n--- Exercicio 9: Consumo de combustivel (URI 1017) ---\n");
-    printf("Digite o tempo gasto na viagem (em horas): ");
-    scanf("%lf", &horas);
-    printf("Digite a velocidade media (em km/h): ");
-    scanf("%lf", &velocidadeMedia);
+    printf("Digite a idade em dias: ");
+    scanf("%d", &dias);
 
-    distancia = horas * velocidadeMedia;
-    litros = distancia / consumoPorLitro;
+    anos = dias / 365;
+    dias = dias % 365;
+    meses = dias / 30;
+    diasRestantes = dias % 30;
 
-    printf("%.3lf litros\n", litros);
+    printf("%d ano(s)\n", anos);
+    printf("%d mes(es)\n", meses);
+    printf("%d dia(s)\n", diasRestantes);
+
+    return 1;
 }
 
-/*
- * 10) (URI 1013) Faca um programa que leia tres valores e apresente
- *     o maior dos tres valores lidos, seguido da mensagem "eh o
- *     maior". Utilize a formula:
- *     MaiorAB = (a + b + abs(a - b)) / 2
- *     Obs.: a formula apenas calcula o maior entre os dois primeiros
- *     (A e B). Um segundo passo, portanto, e necessario para chegar
- *     no resultado esperado (comparar o resultado com o terceiro
- *     valor, C, usando a mesma formula).
- */
-void exercicio10(void) {
-    double a, b, c, maiorAB, maiorFinal;
+int exercicio7() {
+    double raio, volume;
+    double pi = 3.14159;
 
-    printf("\n--- Exercicio 10: Maior entre tres valores (URI 1013) ---\n");
-    printf("Digite o valor de A: ");
-    scanf("%lf", &a);
-    printf("Digite o valor de B: ");
-    scanf("%lf", &b);
-    printf("Digite o valor de C: ");
-    scanf("%lf", &c);
+    printf("Digite o raio da esfera: ");
+    scanf("%lf", &raio);
 
-    // Passo 1: maior entre A e B
-    maiorAB = (a + b + fabs(a - b)) / 2;
+    volume = (4.0 / 3.0) * pi * raio * raio * raio;
 
-    // Passo 2: maior entre o resultado anterior e C
-    maiorFinal = (maiorAB + c + fabs(maiorAB - c)) / 2;
+    printf("VOLUME = %.3lf\n", volume);
 
-    printf("%.2lf eh o maior\n", maiorFinal);
+    return 1;
+}
+
+int exercicio8() {
+    double x1, y1, x2, y2;
+    double distancia;
+
+    printf("Digite x1 e y1: ");
+    scanf("%lf %lf", &x1, &y1);
+
+    printf("Digite x2 e y2: ");
+    scanf("%lf %lf", &x2, &y2);
+
+    distancia = sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+
+    printf("Distancia = %.4lf\n", distancia);
+
+    return 1;
+}
+
+// A funcao main e onde o programa comeca a rodar de verdade.
+int main() {
+
+    int opcao;
+
+    // O "while" repete tudo aqui dentro ate a pessoa digitar 0.
+    while (1) {
+
+        printf("\n===== MENU =====\n");
+        printf("1 - Ordem inversa\n");
+        printf("2 - Notacao cientifica\n");
+        printf("3 - Binario\n");
+        printf("4 - Calculo de salario\n");
+        printf("5 - Soma, media e produto\n");
+        printf("6 - Idade em dias\n");
+        printf("7 - Volume da esfera\n");
+        printf("8 - Distancia entre dois pontos\n");
+        printf("0 - Sair\n");
+        printf("Escolha uma opcao: ");
+
+        scanf("%d", &opcao);
+        printf("\n");
+
+        // switch/case decide o que fazer dependendo do numero digitado.
+        switch (opcao) {
+            case 1:
+                exercicio1();
+                break;
+            case 2:
+                exercicio2();
+                break;
+            case 3:
+                exercicio3();
+                break;
+            case 4:
+                exercicio4();
+                break;
+            case 5:
+                exercicio5();
+                break;
+            case 6:
+                exercicio6();
+                break;
+            case 7:
+                exercicio7();
+                break;
+            case 8:
+                exercicio8();
+                break;
+            case 0:
+                printf("Ate mais!\n");
+                break;
+            default:
+                printf("Opcao invalida, tente de novo.\n");
+                break;
+        }
+
+        if (opcao == 0) {
+            break; // "break" sai do while, ou seja, encerra o programa
+        }
+
+        // Espera o usuario ver o resultado antes de limpar a tela
+        // e mostrar o menu de novo.
+        printf("\nPressione ENTER para continuar...");
+        while (getchar() != '\n'); // limpa o "enter" que ficou no buffer do scanf
+        getchar();                 // espera o ENTER de verdade do usuario
+
+        system("cls"); // limpa a tela DEPOIS que o resultado foi visto
+    }
+
+    return 0;
 }
